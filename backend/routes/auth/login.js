@@ -1,7 +1,7 @@
 require('dotenv').config()
 const express = require("express");
 const router = express.Router();
-const User = require("../models/User");
+const User = require("../../models/User");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -25,7 +25,7 @@ router.post('/', [
 
         // Checking if user exists or not
         if(!user){
-            return req.status(400).json({ error: "User with given E-Mail doesn't exists." });
+            return res.status(400).json({ error: "User with given E-Mail doesn't exists." });
         }
 
         // Matching password from database and entered by user
@@ -33,7 +33,7 @@ router.post('/', [
 
         // if password doesn't matches
         if(!passwordMatches){
-            return req.status(400).json({ error: "Please enter correct password." });
+            return res.status(400).json({ error: "Please enter correct password." });
         }
 
         // if all the provided information are correct creating token
