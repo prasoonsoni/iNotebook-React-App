@@ -1,3 +1,5 @@
 npm i express
 npm i mongoose
 npm i -D nodemon // installed as dev dependencies to run -> npx nodemon index.js
+npm i bcryptjs
+npm i jsonwebtoken
