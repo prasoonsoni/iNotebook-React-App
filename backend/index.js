@@ -21,5 +21,5 @@ app.use('/api/notes/updatenote', require('./routes/notes/updatenote'));
 app.use('/api/notes/deletenote', require('./routes/notes/deletenote'));
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`iNotebook app listening at http://localhost:${port}`)
 })
