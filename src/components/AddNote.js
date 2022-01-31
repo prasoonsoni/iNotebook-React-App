@@ -1,20 +1,21 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import noteContext from "../context/noteContext";
 import NoteItem from "./NoteItem";
 
 const AddNote = () => {
     const context = useContext(noteContext);
-    const { notes, setNotes, addNote } = context;
-
+    const { addNote, getNotes } = context;
     const [note, setNote] = useState({title:"", description:"", tag:""});
     const handleClick = (e)=>{
         e.preventDefault()
         addNote(note.title, note.description, note.tag);
     };
-
     const onChange = (e)=>{
         setNote({...note, [e.target.name]:e.target.value})
     }
+    useEffect(()=>{
+        getNotes();
+    })
     return (
         <div className="container my-3">
             <h2>
