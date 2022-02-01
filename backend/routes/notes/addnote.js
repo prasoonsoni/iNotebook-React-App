@@ -13,7 +13,7 @@ router.post('/',fetchuser, [
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-
+        console.log(req.body)
         const { title, description, tag } = req.body;
         const note = await Note.create({
             user: req.user.id,
