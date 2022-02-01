@@ -11,9 +11,11 @@ router.post('/', [
     body('password', 'Password cannot be blank').exists()
 ], async (req, res)=>{
 
+    let success = false;
     // checking for errors
     const errors = validationResult(req);
     if(!errors.isEmpty()){
+        success = false;
         return res.status(400).json({errors:errors.array()});
     }
 
@@ -25,6 +27,7 @@ router.post('/', [
 
         // Checking if user exists or not
         if(!user){
+            success = false;
             return res.status(400).json({ error: "User with given E-Mail doesn't exists." });
         }
 
@@ -42,8 +45,9 @@ router.post('/', [
                 id:user.id
             }
         }
+        success = true
         const authtoken = jwt.sign(data, process.env.JWT_SECRET_KEY);
-        res.json({authtoken});
+        res.json({success, authtoken});
 
     } catch (error) { // if some error occures
         console.error(error.message);

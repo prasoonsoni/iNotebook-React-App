@@ -14,17 +14,21 @@ const Navbar = () => {
                 </Link>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
-                        <li className={`nav-item ${location.pathname==="/"?"active":""}`}>
+                        <li className={`nav-item ${location.pathname === "/" ? "active" : ""}`}>
                             <Link className="nav-link" to="/">
                                 Home
                             </Link>
                         </li>
-                        <li className={`nav-item ${location.pathname==="/about"?"active":""}`}>
+                        <li className={`nav-item ${location.pathname === "/about" ? "active" : ""}`}>
                             <Link className="nav-link" to="/about">
                                 About
                             </Link>
                         </li>
                     </ul>
+                </div>
+                <div className="flex-row-reverse bd-highlight">
+                    <Link className={`btn btn${location.pathname==="/login" ? "" : "-outline"}-primary mx-1`} to='/login' role="button">Login</Link>
+                    <Link className={`btn btn${location.pathname==="/signup" ? "" : "-outline"}-primary mx-1`} to='/signup' role="button">Signup</Link>
                 </div>
             </nav>
         </>
