@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { useNavigate } from "react-router-dom";
 const host = "http://localhost:5000";
 
-const Login = () => {
+const Login = (props) => {
     
     const [credentials, setCredentials] = useState({email:"", password:""});
     const navigate = useNavigate();
@@ -22,7 +22,9 @@ const Login = () => {
             localStorage.setItem('token', json.authtoken);
             // redirect using useNavigate hook
             navigate("/")
-
+            props.showAlert("Login Successfully", "success")
+        } else {
+            props.showAlert("Invalid Credentials", "danger")
         }
     }
 
@@ -47,7 +49,7 @@ const Login = () => {
                         <label htmlFor="email">Password</label>
                         <input type="password" value={credentials.password} onChange={handleOnChange} className="form-control" name='password' id="password" placeholder="Password" />
                     </div>
-                    <button type="submit" className="btn btn-primary" onClick={handleClick}>Submit</button>
+                    <button type="submit" className="btn btn-primary" onClick={handleClick}>Login</button>
                 </form>
             </div>
         </>

@@ -1,13 +1,19 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import noteContext from "../context/noteContext";
 import AddNote from "./AddNote";
 import NoteItem from "./NoteItem";
 
-const Notes = () => {
+const Notes = (props) => {
     const context = useContext(noteContext);
     const { notes, getNotes, editNote } = context;
+    const navigate = useNavigate();
     useEffect(() => {
-        getNotes();
+        if(localStorage.getItem('token')){
+            getNotes();
+        } else {
+            navigate('/login')
+        }
     });
 
     const [note, setNote] = useState({
@@ -25,6 +31,7 @@ const Notes = () => {
             edescription: currentNote.description,
             etag: currentNote.tag,
         });
+
     };
     const ref = useRef(null);
     const refClose = useRef(null);
@@ -32,7 +39,8 @@ const Notes = () => {
     const handleClick = () => {
         editNote(note.id, note.etitle, note.edescription, note.etitle);
         refClose.current.click();
-        console.log("Add note clicked");
+        console.log("update note clicked");
+        props.showAlert("Note updated successfully", "success")
     };
     const handleOnChange = (event) => {
         setNote({ ...note, [event.target.name]: event.target.value });
@@ -146,7 +154,7 @@ const Notes = () => {
             <div className="container row my-3">
                 {notes.map((note) => {
                     return (
-                        <NoteItem key={note._id} updateNote={updateNote} note={note} />
+                        <NoteItem showAlert={props.showAlert} key={note._id} updateNote={updateNote} note={note} />
                     );
                 })}
             </div>

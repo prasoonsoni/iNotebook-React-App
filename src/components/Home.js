@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import AddNote from "./AddNote";
 import Notes from "./Notes";
 
-const Home = () => {
-    
+const Home = (props) => {
     return (
         <>
-            <AddNote/>
-            <Notes/>
+            <AddNote showAlert={props.showAlert}/>
+            <Notes showAlert={props.showAlert}/>
         </>
     );
 };

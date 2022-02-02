@@ -14,7 +14,7 @@ router.post("/",[
         // if there are errors, return bad request and the errors
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
+            return res.status(400).json({ success:false, errors: errors.array() });
         }
 
         try {
@@ -23,7 +23,7 @@ router.post("/",[
 
             // if user already exists then sending response
             if (user) {
-                return res.status(400).json({ error: "User already exists" })
+                return res.status(400).json({success:false,  error: "User already exists" })
             }
 
             // hashing the password
@@ -44,8 +44,8 @@ router.post("/",[
                 }
             }
 
-            const authToken = jwt.sign(data, process.env.JWT_SECRET_KEY);
-            res.json({ authToken });
+            const authtoken = jwt.sign(data, process.env.JWT_SECRET_KEY);
+            res.json({success:true, authtoken });
 
         } catch (error) { // error message if some error occures
             console.error(error.message);
