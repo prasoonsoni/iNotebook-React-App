@@ -2,9 +2,6 @@ require('dotenv').config()
 const express = require("express");
 const router = express.Router();
 const User = require("../../models/User");
-const { body, validationResult } = require("express-validator");
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 const fetchuser = require('../../middleware/fetchuser');
 
 router.post('/',fetchuser, async (req, res) => {
@@ -16,9 +13,6 @@ router.post('/',fetchuser, async (req, res) => {
         console.error(error.message);
         res.status(500).send("Some internal server occured.");
     }
-
 });
-
-
 module.exports = router;
 

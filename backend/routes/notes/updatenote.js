@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const Note = require("../../models/Note");
-const { body, validationResult } = require("express-validator");
 const fetchuser = require("../../middleware/fetchuser");
 
 router.put('/:id', fetchuser, async (req, res) => {
